@@ -83,6 +83,47 @@ export function ChatInterface({
     }
   }
 
+  const handlePlayAudio = async (text: string): Promise<void> => {
+    try {
+      const response = await fetch('/api/voice/synthesize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: text,
+          philosopherSlug: philosopherSlug
+        })
+      })
+
+      if (response.ok) {
+        const audioBlob = await response.blob()
+        const audioUrl = URL.createObjectURL(audioBlob)
+        
+        // Create and play audio
+        const audio = new Audio(audioUrl)
+        
+        // Return a promise that resolves when audio finishes playing
+        return new Promise((resolve, reject) => {
+          audio.onended = () => {
+            URL.revokeObjectURL(audioUrl)
+            resolve()
+          }
+          
+          audio.onerror = () => {
+            URL.revokeObjectURL(audioUrl)
+            reject(new Error('Audio playback failed'))
+          }
+          
+          audio.play().catch(reject)
+        })
+      } else {
+        throw new Error('Failed to synthesize audio')
+      }
+    } catch (error) {
+      console.error('Error playing audio:', error)
+      throw error
+    }
+  }
+
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
@@ -145,6 +186,7 @@ export function ChatInterface({
             message={message}
             philosopherName={philosopherName}
             philosopherAvatar={philosopherAvatar}
+            onPlayAudio={handlePlayAudio}
           />
         ))}
 

@@ -13,7 +13,7 @@ interface MessageBubbleProps {
   philosopherName: string
   philosopherAvatar?: string
   onSaveInsight?: (content: string) => void
-  onPlayAudio?: (text: string) => void
+  onPlayAudio?: (text: string) => Promise<void>
 }
 
 export function MessageBubble({
@@ -33,12 +33,16 @@ export function MessageBubble({
     }
   }
 
-  const handlePlayAudio = () => {
+  const handlePlayAudio = async () => {
     if (onPlayAudio && !isUser) {
       setIsPlayingAudio(true)
-      onPlayAudio(message.content)
-      // Reset after a delay (this would be handled by actual audio completion)
-      setTimeout(() => setIsPlayingAudio(false), 3000)
+      try {
+        await onPlayAudio(message.content)
+      } catch (error) {
+        console.error('Error playing audio:', error)
+      } finally {
+        setIsPlayingAudio(false)
+      }
     }
   }
 
