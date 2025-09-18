@@ -16,7 +16,7 @@ interface ChatInterfaceProps {
   philosopherName: string
   philosopherAvatar?: string
   initialMessages?: Message[]
-  onSendMessage: (content: string, type: 'text' | 'voice') => Promise<void>
+  onSendMessage: (content: string, type: 'text' | 'voice', audioBlob?: Blob) => Promise<void>
   isLoading?: boolean
 }
 
@@ -38,6 +38,11 @@ export function ChatInterface({
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
+  // Update messages when initialMessages prop changes
+  useEffect(() => {
+    setMessages(initialMessages)
+  }, [initialMessages])
+
   // Scroll to bottom when new messages arrive
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -53,49 +58,26 @@ export function ChatInterface({
   const handleSendTextMessage = async () => {
     if (!inputValue.trim() || isLoading) return
 
-    const userMessage: Message = {
-      id: `temp-${Date.now()}`,
-      conversation_id: conversationId,
-      role: 'user',
-      content: inputValue.trim(),
-      message_type: 'text',
-      created_at: new Date().toISOString()
-    }
-
-    setMessages(prev => [...prev, userMessage])
+    const messageContent = inputValue.trim()
     setInputValue('')
     setIsTyping(true)
 
     try {
-      await onSendMessage(inputValue.trim(), 'text')
+      await onSendMessage(messageContent, 'text')
     } catch (error) {
       console.error('Error sending message:', error)
-      // Remove the temporary message on error
-      setMessages(prev => prev.filter(msg => msg.id !== userMessage.id))
     } finally {
       setIsTyping(false)
     }
   }
 
   const handleVoiceMessage = async (audioBlob: Blob, transcript: string) => {
-    const userMessage: Message = {
-      id: `temp-voice-${Date.now()}`,
-      conversation_id: conversationId,
-      role: 'user',
-      content: transcript,
-      message_type: 'voice',
-      audio_url: URL.createObjectURL(audioBlob),
-      created_at: new Date().toISOString()
-    }
-
-    setMessages(prev => [...prev, userMessage])
     setIsTyping(true)
 
     try {
-      await onSendMessage(transcript, 'voice')
+      await onSendMessage(transcript, 'voice', audioBlob)
     } catch (error) {
       console.error('Error sending voice message:', error)
-      setMessages(prev => prev.filter(msg => msg.id !== userMessage.id))
     } finally {
       setIsTyping(false)
     }

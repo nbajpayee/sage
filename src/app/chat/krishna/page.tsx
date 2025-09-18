@@ -86,11 +86,24 @@ export default function KrishnaChat() {
     }
   }
 
-  const handleSendMessage = async (content: string, type: 'text' | 'voice') => {
+  const handleSendMessage = async (content: string, type: 'text' | 'voice' = 'text', audioBlob?: Blob) => {
     if (!currentConversationId) return
 
     setIsLoading(true)
     setError(null)
+
+    // Add user's message to state first
+    const userMessage: Message = {
+      id: `user-${Date.now()}`,
+      conversation_id: currentConversationId,
+      role: 'user',
+      content: content,
+      message_type: type,
+      audio_url: audioBlob ? URL.createObjectURL(audioBlob) : undefined,
+      created_at: new Date().toISOString()
+    }
+
+    setMessages(prev => [...prev, userMessage])
 
     try {
       const response = await fetch('/api/chat', {
