@@ -48,17 +48,20 @@ export function MessageBubble({
 
   return (
     <div className={cn(
-      "flex gap-3 max-w-4xl",
+      "flex gap-4 max-w-5xl animate-slide-up",
       isUser ? "ml-auto flex-row-reverse" : "mr-auto"
     )}>
       {/* Avatar - only show for assistant messages */}
       {!isUser && (
-        <PhilosopherAvatar 
-          name={philosopherName}
-          avatar={philosopherAvatar}
-          size="sm"
-          className="flex-shrink-0"
-        />
+        <div className="relative flex-shrink-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-sage-400/20 to-sage-500/20 rounded-full blur-md" />
+          <PhilosopherAvatar 
+            name={philosopherName}
+            avatar={philosopherAvatar}
+            size="sm"
+            className="relative z-10 shadow-medium"
+          />
+        </div>
       )}
 
       <div className={cn(
@@ -67,10 +70,10 @@ export function MessageBubble({
       )}>
         {/* Message bubble */}
         <div className={cn(
-          "rounded-2xl px-4 py-3 max-w-md shadow-sm",
+          "rounded-2xl px-6 py-4 max-w-lg shadow-medium transition-all duration-200 hover:shadow-large",
           isUser 
-            ? "bg-blue-600 text-white rounded-br-md" 
-            : "bg-white text-gray-900 rounded-bl-md border"
+            ? "bg-gradient-to-r from-sage-500 to-sage-600 text-white rounded-br-md" 
+            : "bg-white text-wisdom-900 rounded-bl-md border border-sage-100/50"
         )}>
           {/* Voice message indicator */}
           {isVoiceMessage && message.audio_url && (
@@ -83,21 +86,21 @@ export function MessageBubble({
           )}
 
           {/* Message content */}
-          <p className="text-sm leading-relaxed whitespace-pre-wrap">
+          <p className="text-base leading-relaxed whitespace-pre-wrap font-medium">
             {message.content}
           </p>
 
           {/* Action buttons for assistant messages */}
           {!isUser && (
-            <div className="flex items-center gap-1 mt-2 pt-2 border-t border-gray-100">
+            <div className="flex items-center gap-2 mt-3 pt-3 border-t border-sage-100/50">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={handlePlayAudio}
                 disabled={isPlayingAudio}
-                className="h-6 px-2 text-xs text-gray-500 hover:text-gray-700"
+                className="h-8 px-3 text-xs text-wisdom-500 hover:text-sage-600 hover:bg-sage-50 rounded-lg transition-all duration-200 group"
               >
-                <Volume2 className="w-3 h-3 mr-1" />
+                <Volume2 className="w-3 h-3 mr-1 group-hover:scale-110 transition-transform" />
                 {isPlayingAudio ? 'Playing...' : 'Listen'}
               </Button>
               
@@ -105,9 +108,9 @@ export function MessageBubble({
                 variant="ghost"
                 size="sm"
                 onClick={handleSaveInsight}
-                className="h-6 px-2 text-xs text-gray-500 hover:text-gray-700"
+                className="h-8 px-3 text-xs text-wisdom-500 hover:text-sage-600 hover:bg-sage-50 rounded-lg transition-all duration-200 group"
               >
-                <BookmarkPlus className="w-3 h-3 mr-1" />
+                <BookmarkPlus className="w-3 h-3 mr-1 group-hover:scale-110 transition-transform" />
                 Save
               </Button>
             </div>
@@ -116,7 +119,7 @@ export function MessageBubble({
 
         {/* Timestamp */}
         <span className={cn(
-          "text-xs text-gray-500 px-2",
+          "text-xs text-wisdom-400 px-2 font-medium",
           isUser ? "text-right" : "text-left"
         )}>
           {formatDate(message.created_at)}

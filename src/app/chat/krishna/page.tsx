@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ChatInterface } from '@/components/chat/ChatInterface'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, Sparkles } from 'lucide-react'
+import { ArrowLeft, Sparkles, MessageCircle } from 'lucide-react'
 import { Message } from '@/lib/supabase'
 import { generateConversationTitle } from '@/lib/utils'
 
@@ -183,12 +183,18 @@ export default function KrishnaChat() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-orange-50 to-yellow-50 flex items-center justify-center">
-        <div className="text-center p-8">
-          <div className="text-red-500 text-6xl mb-4">⚠️</div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Something went wrong</h2>
-          <p className="text-gray-600 mb-4">{error}</p>
-          <Button onClick={() => window.location.reload()}>
+      <div className="min-h-screen bg-gradient-to-br from-white via-sage-50/30 to-white flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-sage-100/40 via-transparent to-transparent" />
+        <div className="text-center p-8 card-modern max-w-md mx-4 relative animate-scale-in">
+          <div className="w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <span className="text-2xl">⚠️</span>
+          </div>
+          <h2 className="text-2xl font-display font-bold text-wisdom-900 mb-3">Something went wrong</h2>
+          <p className="text-wisdom-600 mb-6 leading-relaxed">{error}</p>
+          <Button 
+            onClick={() => window.location.reload()}
+            className="btn-primary px-6 py-3 rounded-xl"
+          >
             Try Again
           </Button>
         </div>
@@ -198,57 +204,77 @@ export default function KrishnaChat() {
 
   if (!krishnaData || !currentConversationId) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-orange-50 to-yellow-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-12 h-12 border-4 border-orange-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Connecting with Krishna...</p>
+      <div className="min-h-screen bg-gradient-to-br from-white via-sage-50/30 to-white flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-sage-100/40 via-transparent to-transparent" />
+        <div className="text-center relative animate-fade-in">
+          <div className="w-16 h-16 border-4 border-sage-400 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+          <p className="text-xl text-wisdom-600 font-medium">Connecting with Krishna...</p>
+          <p className="text-sm text-wisdom-500 mt-2">Preparing your spiritual journey</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-yellow-50">
+    <div className="min-h-screen bg-gradient-to-br from-white via-sage-50/20 to-white relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-sage-100/30 via-transparent to-transparent" />
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-sm border-b">
-        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center gap-4">
-          <Button variant="ghost" size="sm" onClick={goBack}>
-            <ArrowLeft className="w-4 h-4 mr-2" />
+      <div className="sticky top-0 z-10 glass border-b border-sage-200/50 shadow-soft">
+        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center gap-4">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            onClick={goBack}
+            className="hover:bg-sage-50 rounded-xl transition-all duration-200 group"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
             Back
           </Button>
           <div className="flex-1">
-            <h1 className="text-lg font-semibold text-gray-900">
-              Chat with {krishnaData.philosopher.name}
+            <h1 className="text-xl font-display font-bold text-wisdom-900">
+              Chat with <span className="gradient-text">{krishnaData.philosopher.name}</span>
             </h1>
-            <p className="text-sm text-gray-600">{krishnaData.philosopher.title}</p>
+            <p className="text-sm text-wisdom-600">{krishnaData.philosopher.title}</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-sage-400 rounded-full animate-pulse" />
+            <span className="text-xs text-wisdom-500 font-medium">Online</span>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto h-[calc(100vh-80px)]">
+      <div className="max-w-5xl mx-auto h-[calc(100vh-88px)] relative">
         {messages.length === 0 && (
-          <div className="p-6">
-            <div className="mb-6 text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-800 rounded-full text-sm font-medium mb-4">
+          <div className="p-8 animate-fade-in">
+            <div className="mb-8 text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-sage-100/50 text-sage-700 rounded-full text-sm font-medium mb-6 border border-sage-200/50">
                 <Sparkles className="w-4 h-4" />
-                Conversation Starters
+                <span>Conversation Starters</span>
               </div>
-              <p className="text-gray-600 mb-4">
-                Choose a topic to begin your conversation with Krishna
+              <h2 className="text-3xl font-display font-bold text-wisdom-900 mb-4">
+                Begin Your Journey with <span className="gradient-text">Krishna</span>
+              </h2>
+              <p className="text-lg text-wisdom-600 mb-6 max-w-2xl mx-auto leading-relaxed">
+                Choose a topic to begin your conversation with the divine teacher
               </p>
             </div>
             
-            <div className="grid gap-3 max-w-2xl mx-auto">
+            <div className="grid gap-4 max-w-3xl mx-auto">
               {krishnaData.conversationStarters.map((starter, index) => (
-                <Button
+                <div
                   key={index}
-                  variant="outline"
-                  className="p-4 h-auto text-left justify-start hover:bg-orange-50 hover:border-orange-200"
+                  className="group p-6 card-modern cursor-pointer hover:scale-[1.02] transition-all duration-300 border-l-4 border-sage-200 hover:border-sage-400"
                   onClick={() => handleStarterClick(starter)}
                 >
-                  <span className="text-sm leading-relaxed">{starter}</span>
-                </Button>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-gradient-to-br from-sage-100 to-sage-200 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                      <MessageCircle className="w-5 h-5 text-sage-600" />
+                    </div>
+                    <p className="text-wisdom-700 leading-relaxed font-medium group-hover:text-wisdom-900 transition-colors">{starter}</p>
+                  </div>
+                </div>
               ))}
             </div>
           </div>

@@ -48,128 +48,183 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-amber-50">
+    <div className="min-h-screen bg-gradient-to-br from-white via-sage-50/30 to-white relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-sage-100/40 via-transparent to-transparent" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-sage-200/20 to-transparent rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-sage-100/30 to-transparent rounded-full blur-3xl" />
       {/* Hero Section */}
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-orange-100/20 to-yellow-100/20" />
         
-        <div className="relative max-w-6xl mx-auto px-4 py-16 sm:py-24">
-          <div className="text-center">
+        <div className="relative max-w-7xl mx-auto px-4 py-20 sm:py-32">
+          <div className="text-center animate-fade-in">
             {/* Logo/Brand */}
-            <div className="mb-8">
-              <h1 className="text-4xl sm:text-6xl font-bold text-gray-900 mb-4">
-                Welcome to Sage
+            <div className="mb-12">
+              <h1 className="text-5xl sm:text-7xl font-display font-bold text-wisdom-900 mb-3 tracking-tight">
+                Welcome to
               </h1>
-              <p className="text-xl sm:text-2xl text-gray-600 font-light">
-                Connect with the wisdom of history's greatest teachers
+              <div className="inline-flex items-center gap-6 mb-3">
+                <div className="w-16 h-16 bg-gradient-to-br from-sage-500 to-sage-600 rounded-2xl flex items-center justify-center shadow-large">
+                  <Sparkles className="w-8 h-8 text-white" />
+                </div>
+                <span className="text-7xl font-display font-bold gradient-text leading-[1.5]">Sage</span>
+              </div>
+              <p className="text-xl sm:text-2xl text-wisdom-600 font-light max-w-3xl mx-auto leading-relaxed">
+                Connect with history's greatest spiritual teachers through AI-powered conversations that bring ancient wisdom to modern life
               </p>
             </div>
 
             {/* Krishna Introduction */}
             {krishnaData && (
-              <div className="mb-12">
-                <div className="flex justify-center mb-6">
-                  <PhilosopherAvatar 
-                    name={krishnaData.philosopher.name}
-                    avatar={krishnaData.philosopher.avatar_url}
-                    size="lg"
-                    className="w-24 h-24 shadow-lg ring-4 ring-white"
-                  />
+              <div className="mb-16 animate-slide-up">
+                <div className="flex justify-center mb-8">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-sage-400 to-sage-500 rounded-full blur-xl opacity-30 scale-110" />
+                    <PhilosopherAvatar 
+                      name={krishnaData.philosopher.name}
+                      avatar={krishnaData.philosopher.avatar_url}
+                      size="lg"
+                      className="w-28 h-28 shadow-large ring-4 ring-white/80 relative z-10"
+                    />
+                  </div>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-3">
-                  Meet {krishnaData.philosopher.name}
-                </h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
-                  {krishnaData.philosopher.description}
-                </p>
-                
-                {/* Specialties */}
-                <div className="flex flex-wrap justify-center gap-2 mb-8">
-                  {krishnaData.philosopher.specialties.map((specialty, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium"
-                    >
-                      {specialty}
-                    </span>
-                  ))}
+                <div className="max-w-4xl mx-auto">
+                  <h2 className="text-3xl sm:text-4xl font-display font-bold text-wisdom-900 mb-4">
+                    Begin Your Journey with <span className="gradient-text">{krishnaData.philosopher.name}</span>
+                  </h2>
+                  <p className="text-lg text-wisdom-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+                    {krishnaData.philosopher.description}
+                  </p>
+                  
+                  {/* Specialties */}
+                  <div className="flex flex-wrap justify-center gap-3 mb-12">
+                    {krishnaData.philosopher.specialties.map((specialty, index) => (
+                      <span
+                        key={index}
+                        className="px-4 py-2 bg-gradient-to-r from-sage-50 to-sage-100 text-sage-700 rounded-full text-sm font-medium border border-sage-200/50 shadow-soft hover:shadow-medium transition-all duration-200 hover:scale-105"
+                      >
+                        {specialty}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
 
             {/* Call to Action */}
-            <div className="mb-16">
-              <Button
-                onClick={startConversation}
-                disabled={isLoading}
-                size="lg"
-                className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-              >
-                {isLoading ? (
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                ) : (
-                  <MessageCircle className="w-5 h-5 mr-2" />
-                )}
-                Start Your Journey with Krishna
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-              <p className="text-sm text-gray-500 mt-3">
-                Free • Anonymous • No signup required
-              </p>
+            <div className="mb-20 animate-scale-in">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+                <Button
+                  onClick={startConversation}
+                  disabled={isLoading}
+                  size="lg"
+                  className="btn-primary px-8 py-4 text-lg font-semibold rounded-2xl group"
+                >
+                  {isLoading ? (
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  ) : (
+                    <MessageCircle className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                  )}
+                  Start Your Spiritual Journey
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="px-8 py-4 text-lg font-semibold rounded-2xl border-2 border-sage-200 text-sage-700 hover:bg-sage-50 hover:border-sage-300 transition-all duration-200"
+                >
+                  <Mic className="w-5 h-5 mr-2" />
+                  Try Voice Chat
+                </Button>
+              </div>
+              <div className="flex items-center justify-center gap-6 text-sm text-wisdom-500">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-sage-400 rounded-full" />
+                  <span>Free Forever</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-sage-400 rounded-full" />
+                  <span>Anonymous</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-sage-400 rounded-full" />
+                  <span>No Signup</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Features Section */}
-      <div className="py-16 bg-white/50">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">
-              Experience Wisdom Like Never Before
+      <div className="py-20 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-sage-50/20 to-white" />
+        <div className="max-w-7xl mx-auto px-4 relative">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-sage-100/50 text-sage-700 rounded-full text-sm font-medium mb-6 border border-sage-200/50">
+              <Sparkles className="w-4 h-4" />
+              <span>Powered by Advanced AI</span>
+            </div>
+            <h3 className="text-4xl sm:text-5xl font-display font-bold text-wisdom-900 mb-6">
+              Experience Wisdom Like <span className="gradient-text">Never Before</span>
             </h3>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Engage in meaningful conversations that blend ancient wisdom with modern understanding
+            <p className="text-xl text-wisdom-600 max-w-3xl mx-auto leading-relaxed">
+              Engage in meaningful conversations that blend ancient wisdom with modern understanding through cutting-edge AI technology
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
             {/* Text & Voice Chat */}
-            <div className="text-center p-6 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mic className="w-6 h-6 text-blue-600" />
+            <div className="group text-center p-8 card-modern hover:scale-105 transition-all duration-300">
+              <div className="relative mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-sage-100 to-sage-200 rounded-2xl flex items-center justify-center mx-auto shadow-medium group-hover:shadow-large transition-all duration-300">
+                  <Mic className="w-8 h-8 text-sage-600 group-hover:scale-110 transition-transform" />
+                </div>
+                <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-sage-400 to-sage-500 rounded-full flex items-center justify-center">
+                  <Sparkles className="w-3 h-3 text-white" />
+                </div>
               </div>
-              <h4 className="text-xl font-semibold text-gray-900 mb-3">
+              <h4 className="text-2xl font-display font-bold text-wisdom-900 mb-4">
                 Multi-Modal Conversations
               </h4>
-              <p className="text-gray-600">
-                Chat through text or speak naturally with voice recognition and Krishna's authentic voice responses
+              <p className="text-wisdom-600 leading-relaxed">
+                Chat through text or speak naturally with voice recognition and Krishna's authentic voice responses powered by advanced AI
               </p>
             </div>
 
             {/* Personalized Guidance */}
-            <div className="text-center p-6 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-6 h-6 text-orange-600" />
+            <div className="group text-center p-8 card-modern hover:scale-105 transition-all duration-300">
+              <div className="relative mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-sage-100 to-sage-200 rounded-2xl flex items-center justify-center mx-auto shadow-medium group-hover:shadow-large transition-all duration-300">
+                  <Heart className="w-8 h-8 text-sage-600 group-hover:scale-110 transition-transform" />
+                </div>
+                <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-sage-400 to-sage-500 rounded-full flex items-center justify-center">
+                  <Sparkles className="w-3 h-3 text-white" />
+                </div>
               </div>
-              <h4 className="text-xl font-semibold text-gray-900 mb-3">
+              <h4 className="text-2xl font-display font-bold text-wisdom-900 mb-4">
                 Personalized Guidance
               </h4>
-              <p className="text-gray-600">
-                Receive wisdom tailored to your unique challenges, drawing from the timeless teachings of the Bhagavad Gita
+              <p className="text-wisdom-600 leading-relaxed">
+                Receive wisdom tailored to your unique challenges, drawing from the timeless teachings of the Bhagavad Gita and Krishna's divine insights
               </p>
             </div>
 
             {/* Save Insights */}
-            <div className="text-center p-6 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Sparkles className="w-6 h-6 text-yellow-600" />
+            <div className="group text-center p-8 card-modern hover:scale-105 transition-all duration-300">
+              <div className="relative mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-sage-100 to-sage-200 rounded-2xl flex items-center justify-center mx-auto shadow-medium group-hover:shadow-large transition-all duration-300">
+                  <Sparkles className="w-8 h-8 text-sage-600 group-hover:scale-110 transition-transform" />
+                </div>
+                <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-sage-400 to-sage-500 rounded-full flex items-center justify-center">
+                  <Sparkles className="w-3 h-3 text-white" />
+                </div>
               </div>
-              <h4 className="text-xl font-semibold text-gray-900 mb-3">
+              <h4 className="text-2xl font-display font-bold text-wisdom-900 mb-4">
                 Meaningful Insights
               </h4>
-              <p className="text-gray-600">
-                Save and reflect on profound moments from your conversations for continued spiritual growth
+              <p className="text-wisdom-600 leading-relaxed">
+                Save and reflect on profound moments from your conversations for continued spiritual growth and personal transformation
               </p>
             </div>
           </div>
@@ -178,37 +233,47 @@ export default function Home() {
 
       {/* Sample Conversation Starters */}
       {krishnaData && (
-        <div className="py-16">
-          <div className="max-w-4xl mx-auto px-4">
-            <div className="text-center mb-12">
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                What Would You Like to Explore?
+        <div className="py-20 bg-gradient-to-b from-white to-sage-50/30">
+          <div className="max-w-5xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-sage-100/50 text-sage-700 rounded-full text-sm font-medium mb-6 border border-sage-200/50">
+                <MessageCircle className="w-4 h-4" />
+                <span>Start Your Journey</span>
+              </div>
+              <h3 className="text-4xl sm:text-5xl font-display font-bold text-wisdom-900 mb-6">
+                What Would You Like to <span className="gradient-text">Explore?</span>
               </h3>
-              <p className="text-lg text-gray-600">
-                Here are some ways Krishna can guide you on your journey
+              <p className="text-xl text-wisdom-600 max-w-2xl mx-auto leading-relaxed">
+                Here are some ways Krishna can guide you on your spiritual journey
               </p>
             </div>
 
-            <div className="grid gap-4 max-w-2xl mx-auto">
+            <div className="grid gap-6 max-w-3xl mx-auto">
               {krishnaData.conversationStarters.slice(0, 4).map((starter, index) => (
                 <div
                   key={index}
-                  className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer border border-gray-100 hover:border-orange-200"
+                  className="group p-6 card-modern cursor-pointer hover:scale-[1.02] transition-all duration-300 border-l-4 border-sage-200 hover:border-sage-400"
                   onClick={startConversation}
                 >
-                  <p className="text-gray-700 leading-relaxed">{starter}</p>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-gradient-to-br from-sage-100 to-sage-200 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                      <MessageCircle className="w-5 h-5 text-sage-600" />
+                    </div>
+                    <p className="text-wisdom-700 leading-relaxed font-medium group-hover:text-wisdom-900 transition-colors">{starter}</p>
+                  </div>
                 </div>
               ))}
             </div>
 
-            <div className="text-center mt-8">
+            <div className="text-center mt-12">
               <Button
                 onClick={startConversation}
                 variant="outline"
-                className="border-orange-200 text-orange-700 hover:bg-orange-50"
+                size="lg"
+                className="px-8 py-4 text-lg font-semibold rounded-2xl border-2 border-sage-200 text-sage-700 hover:bg-sage-50 hover:border-sage-300 transition-all duration-200 group"
               >
                 Explore All Topics
-                <ArrowRight className="w-4 h-4 ml-2" />
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </div>
           </div>
@@ -216,22 +281,37 @@ export default function Home() {
       )}
 
       {/* Footer */}
-      <footer className="bg-gray-50 py-12">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <div className="mb-6">
-            <h4 className="text-2xl font-bold text-gray-900 mb-2">Wisdom Guide</h4>
-            <p className="text-gray-600">
-              Connecting seekers with timeless wisdom for modern life
+      <footer className="bg-gradient-to-t from-wisdom-900 to-wisdom-800 py-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-sage-900/20 via-transparent to-transparent" />
+        <div className="max-w-6xl mx-auto px-4 text-center relative">
+          <div className="mb-8">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-gradient-to-br from-sage-400 to-sage-500 rounded-xl flex items-center justify-center shadow-large">
+                <Sparkles className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-2xl font-display font-bold text-white">Sage</span>
+            </div>
+            <h4 className="text-3xl font-display font-bold text-white mb-3">Wisdom Guide</h4>
+            <p className="text-xl text-wisdom-300 max-w-2xl mx-auto leading-relaxed">
+              Connecting seekers with timeless wisdom for modern life through AI-powered spiritual conversations
             </p>
           </div>
           
-          <div className="text-sm text-gray-500">
-            <p className="mb-2">
-              Built with respect for spiritual traditions and the seekers who follow them
-            </p>
-            <p>
-              This is an AI-powered experience. For serious mental health concerns, please consult a professional.
-            </p>
+          <div className="border-t border-wisdom-700 pt-8">
+            <div className="text-wisdom-400 space-y-3">
+              <p className="text-lg">
+                Built with respect for spiritual traditions and the seekers who follow them
+              </p>
+              <p className="text-sm">
+                This is an AI-powered experience. For serious mental health concerns, please consult a professional.
+              </p>
+              <div className="flex items-center justify-center gap-6 mt-6 text-sm">
+                <div className="flex items-center gap-2">
+                  <Heart className="w-4 h-4 text-sage-400" />
+                  <span>Made with love for spiritual seekers</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </footer>

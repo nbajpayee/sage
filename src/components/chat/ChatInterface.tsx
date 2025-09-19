@@ -137,24 +137,36 @@ export function ChatInterface({
   }
 
   return (
-    <div className="flex flex-col h-full bg-gradient-to-b from-orange-50 to-yellow-50">
+    <div className="flex flex-col h-full bg-gradient-to-b from-white/50 to-sage-50/30 relative">
       {/* Header */}
-      <div className="flex items-center gap-3 p-4 border-b bg-white/80 backdrop-blur-sm">
-        <PhilosopherAvatar 
-          name={philosopherName}
-          avatar={philosopherAvatar}
-          size="md"
-        />
-        <div>
-          <h2 className="font-semibold text-gray-900">{philosopherName}</h2>
-          <p className="text-sm text-gray-600">Divine Teacher and Guide</p>
+      <div className="flex items-center gap-4 p-6 border-b border-sage-200/50 glass">
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-sage-400/20 to-sage-500/20 rounded-full blur-lg" />
+          <PhilosopherAvatar 
+            name={philosopherName}
+            avatar={philosopherAvatar}
+            size="md"
+            className="relative z-10 shadow-medium"
+          />
         </div>
-        <div className="ml-auto">
+        <div className="flex-1">
+          <h2 className="text-lg font-display font-bold text-wisdom-900">{philosopherName}</h2>
+          <p className="text-sm text-wisdom-600">Divine Teacher and Guide</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-sage-400 rounded-full animate-pulse" />
+            <span className="text-xs text-wisdom-500 font-medium">Online</span>
+          </div>
           <Button
             variant={isVoiceMode ? "default" : "outline"}
             size="sm"
             onClick={toggleVoiceMode}
-            className="gap-2"
+            className={`gap-2 rounded-xl transition-all duration-200 ${
+              isVoiceMode 
+                ? 'bg-gradient-to-r from-sage-500 to-sage-600 hover:from-sage-600 hover:to-sage-700 text-white shadow-medium' 
+                : 'border-sage-200 text-sage-700 hover:bg-sage-50 hover:border-sage-300'
+            }`}
           >
             {isVoiceMode ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
             {isVoiceMode ? 'Text' : 'Voice'}
@@ -163,20 +175,25 @@ export function ChatInterface({
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-6 space-y-6">
         {messages.length === 0 && (
-          <div className="text-center text-gray-500 mt-8">
-            <PhilosopherAvatar 
-              name={philosopherName}
-              avatar={philosopherAvatar}
-              size="lg"
-              className="mx-auto mb-4"
-            />
-            <p className="text-lg font-medium mb-2">Welcome, seeker of wisdom</p>
-            <p className="text-sm">
-              I am Krishna, here to guide you on your spiritual journey. 
-              How may I help you today?
-            </p>
+          <div className="text-center text-wisdom-500 mt-12 animate-fade-in">
+            <div className="relative mb-8">
+              <div className="absolute inset-0 bg-gradient-to-r from-sage-400/30 to-sage-500/30 rounded-full blur-2xl scale-150" />
+              <PhilosopherAvatar 
+                name={philosopherName}
+                avatar={philosopherAvatar}
+                size="lg"
+                className="mx-auto relative z-10 shadow-large"
+              />
+            </div>
+            <div className="max-w-md mx-auto">
+              <p className="text-2xl font-display font-bold text-wisdom-900 mb-3">Welcome, seeker of wisdom</p>
+              <p className="text-lg text-wisdom-600 leading-relaxed">
+                I am Krishna, here to guide you on your spiritual journey. 
+                How may I help you today?
+              </p>
+            </div>
           </div>
         )}
 
@@ -191,17 +208,21 @@ export function ChatInterface({
         ))}
 
         {isTyping && (
-          <div className="flex items-center gap-3">
-            <PhilosopherAvatar 
-              name={philosopherName}
-              avatar={philosopherAvatar}
-              size="sm"
-            />
-            <div className="bg-white rounded-2xl px-4 py-3 shadow-sm">
+          <div className="flex items-center gap-4 animate-slide-up">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-sage-400/20 to-sage-500/20 rounded-full blur-md" />
+              <PhilosopherAvatar 
+                name={philosopherName}
+                avatar={philosopherAvatar}
+                size="sm"
+                className="relative z-10"
+              />
+            </div>
+            <div className="bg-white rounded-2xl px-6 py-4 shadow-medium border border-sage-100/50">
               <div className="flex space-x-1">
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                <div className="w-2 h-2 bg-sage-400 rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-sage-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                <div className="w-2 h-2 bg-sage-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
               </div>
             </div>
           </div>
@@ -211,7 +232,7 @@ export function ChatInterface({
       </div>
 
       {/* Input Area */}
-      <div className="p-4 border-t bg-white/80 backdrop-blur-sm">
+      <div className="p-6 border-t border-sage-200/50 glass">
         {isVoiceMode ? (
           <VoiceControls
             onVoiceMessage={handleVoiceMessage}
@@ -220,7 +241,7 @@ export function ChatInterface({
             disabled={isLoading}
           />
         ) : (
-          <div className="flex gap-2">
+          <div className="flex gap-3 max-w-4xl mx-auto">
             <Input
               ref={inputRef}
               value={inputValue}
@@ -228,14 +249,14 @@ export function ChatInterface({
               onKeyPress={handleKeyPress}
               placeholder="Share what's on your heart..."
               disabled={isLoading}
-              className="flex-1"
+              className="flex-1 input-modern text-lg py-4 px-6 rounded-2xl border-2 focus:border-sage-400 focus:ring-sage-400/20 transition-all duration-200"
             />
             <Button 
               onClick={handleSendTextMessage}
               disabled={!inputValue.trim() || isLoading}
-              size="icon"
+              className="btn-primary px-6 py-4 rounded-2xl shadow-medium hover:shadow-large transition-all duration-200 group"
             >
-              <Send className="w-4 h-4" />
+              <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
         )}

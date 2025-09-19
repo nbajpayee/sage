@@ -142,60 +142,86 @@ export function VoiceControls({
 
   if (!isSupported) {
     return (
-      <div className="text-center py-4 text-gray-500">
-        <p className="text-sm">Voice recording is not supported in your browser.</p>
-        <p className="text-xs mt-1">Please use a modern browser with microphone access.</p>
+      <div className="text-center py-8 animate-fade-in">
+        <div className="w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <Mic className="w-8 h-8 text-red-500" />
+        </div>
+        <p className="text-lg font-medium text-wisdom-700 mb-2">Voice recording not supported</p>
+        <p className="text-sm text-wisdom-500">Please use a modern browser with microphone access.</p>
       </div>
     )
   }
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-6 py-4 animate-fade-in">
       {/* Recording Button */}
-      <Button
-        onClick={toggleRecording}
-        disabled={disabled}
-        size="lg"
-        className={cn(
-          "w-16 h-16 rounded-full transition-all duration-200",
-          isRecording 
-            ? "bg-red-500 hover:bg-red-600 animate-pulse" 
-            : "bg-blue-600 hover:bg-blue-700"
+      <div className="relative">
+        {isRecording && (
+          <div className="absolute inset-0 bg-red-400 rounded-full animate-ping opacity-30" />
         )}
-      >
-        {isRecording ? (
-          <Square className="w-6 h-6 text-white" />
-        ) : (
-          <Mic className="w-6 h-6 text-white" />
-        )}
-      </Button>
+        <Button
+          onClick={toggleRecording}
+          disabled={disabled}
+          size="lg"
+          className={cn(
+            "w-20 h-20 rounded-full transition-all duration-300 shadow-large hover:shadow-xl relative z-10 group",
+            isRecording 
+              ? "bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 animate-pulse" 
+              : "bg-gradient-to-r from-sage-500 to-sage-600 hover:from-sage-600 hover:to-sage-700 hover:scale-105"
+          )}
+        >
+          {isRecording ? (
+            <Square className="w-8 h-8 text-white group-hover:scale-110 transition-transform" />
+          ) : (
+            <Mic className="w-8 h-8 text-white group-hover:scale-110 transition-transform" />
+          )}
+        </Button>
+      </div>
 
       {/* Status Text */}
       <div className="text-center">
         {isRecording ? (
-          <p className="text-sm text-gray-600">
-            {isTranscribing ? 'Listening...' : 'Recording...'}
-          </p>
+          <div className="space-y-2">
+            <p className="text-lg font-medium text-wisdom-700">
+              {isTranscribing ? 'Listening...' : 'Recording...'}
+            </p>
+            <p className="text-sm text-wisdom-500">
+              Speak clearly and naturally
+            </p>
+          </div>
         ) : (
-          <p className="text-sm text-gray-500">
-            Tap to record your message
-          </p>
+          <div className="space-y-2">
+            <p className="text-lg font-medium text-wisdom-700">
+              Ready to listen
+            </p>
+            <p className="text-sm text-wisdom-500">
+              Tap the microphone to record your message
+            </p>
+          </div>
         )}
       </div>
 
       {/* Live Transcript */}
       {transcript && (
-        <div className="max-w-md p-3 bg-gray-100 rounded-lg">
-          <p className="text-sm text-gray-700">{transcript}</p>
+        <div className="max-w-lg p-4 bg-white rounded-2xl shadow-medium border border-sage-100/50 animate-slide-up">
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 bg-gradient-to-br from-sage-100 to-sage-200 rounded-xl flex items-center justify-center flex-shrink-0">
+              <Mic className="w-4 h-4 text-sage-600" />
+            </div>
+            <div>
+              <p className="text-xs text-wisdom-500 font-medium mb-1">Live Transcript</p>
+              <p className="text-base text-wisdom-700 leading-relaxed">{transcript}</p>
+            </div>
+          </div>
         </div>
       )}
 
       {/* Visual Indicator */}
       {isRecording && (
-        <div className="flex items-center gap-1">
-          <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-          <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-          <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
         </div>
       )}
     </div>
