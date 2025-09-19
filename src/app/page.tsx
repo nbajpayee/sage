@@ -58,7 +58,7 @@ export default function Home() {
             {/* Logo/Brand */}
             <div className="mb-8">
               <h1 className="text-4xl sm:text-6xl font-bold text-gray-900 mb-4">
-                Wisdom Guide
+                Welcome to Sage
               </h1>
               <p className="text-xl sm:text-2xl text-gray-600 font-light">
                 Connect with the wisdom of history's greatest teachers

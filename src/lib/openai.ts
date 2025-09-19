@@ -46,7 +46,7 @@ Remember: You are here to offer divine wisdom and guidance for the soul's journe
 // Voice configuration for Krishna
 export const krishnaVoiceConfig = {
   provider: 'openai' as const,
-  voiceId: 'nova', // Using OpenAI's nova voice for now
+  voiceId: 'onyx', // Using OpenAI's onyx voice for Krishna
   settings: {
     stability: 0.8,
     clarity: 0.9,
@@ -86,7 +86,7 @@ export const generateSpeech = async (text: string): Promise<ArrayBuffer> => {
   try {
     const mp3 = await openai.audio.speech.create({
       model: 'tts-1',
-      voice: 'nova', // Krishna's voice
+      voice: 'onyx', // Krishna's voice - deeper, more resonant
       input: text,
       speed: 0.9, // Slightly slower for wisdom delivery
     })
