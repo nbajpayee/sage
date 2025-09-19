@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
         name: 'Krishna',
         slug: 'krishna',
         title: 'Divine Teacher and Guide',
-        avatar_url: null,
+        avatar_url: '/krishna/Krishna.png',
       }
     }
 
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
         name: 'Krishna',
         slug: 'krishna',
         title: 'Divine Teacher and Guide',
-        avatar_url: null,
+        avatar_url: '/krishna/Krishna.png',
       }
     })
   }

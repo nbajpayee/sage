@@ -11,7 +11,7 @@ const fallbackKrishnaData = {
   tradition: 'Hinduism',
   description: 'The divine incarnation who shared the wisdom of the Bhagavad Gita with Arjuna on the battlefield of Kurukshetra. Krishna embodies divine love, wisdom, and guidance on dharma (righteous duty).',
   specialties: ['dharma', 'karma', 'devotion', 'duty', 'detachment', 'love', 'purpose'],
-  avatar_url: null,
+  avatar_url: '/krishna/Krishna.png',
   conversation_starters: [
     "I feel lost in life and don't know my purpose. Can you help me understand my dharma?",
     "I'm struggling with a difficult decision. How do I know what's right?",
@@ -55,7 +55,7 @@ export async function GET(request: NextRequest) {
         tradition: krishna.tradition,
         description: krishna.description,
         specialties: krishna.specialties,
-        avatar_url: krishna.avatar_url,
+        avatar_url: krishna.avatar_url || fallbackKrishnaData.avatar_url,
       },
       conversationStarters: krishna.conversation_starters,
       randomStarter,

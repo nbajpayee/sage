@@ -28,10 +28,23 @@ export function PhilosopherAvatar({
     .join('')
     .toUpperCase()
 
+  // If we have an avatar URL, use a simple img tag instead of AvatarImage
+  if (avatar) {
+    return (
+      <div className={cn("relative overflow-hidden rounded-full", sizeClasses[size], className)}>
+        <img 
+          src={avatar} 
+          alt={name} 
+          className="w-full h-full object-cover"
+        />
+      </div>
+    )
+  }
+
+  // Fallback to Avatar component with initials
   return (
     <Avatar className={cn(sizeClasses[size], className)}>
-      <AvatarImage src={avatar} alt={name} />
-      <AvatarFallback className="bg-gradient-to-br from-orange-400 to-yellow-500 text-white font-semibold">
+      <AvatarFallback className="bg-gradient-to-br from-sage-500 to-sage-600 text-white font-semibold">
         {initials}
       </AvatarFallback>
     </Avatar>

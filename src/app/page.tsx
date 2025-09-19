@@ -64,7 +64,7 @@ export default function Home() {
                 Welcome to
               </h1>
               <div className="inline-flex items-center gap-6 mb-6 animate-sacred-float">
-                <div className="w-16 h-16 bg-gradient-to-br from-sage-500 to-sage-600 rounded-2xl flex items-center justify-center shadow-large animate-gentle-pulse">
+                <div className="w-16 h-16 bg-gradient-to-br from-sage-500 to-sage-600 rounded-2xl flex items-center justify-center shadow-large">
                   <Sparkles className="w-8 h-8 text-white" />
                 </div>
                 <span className="text-7xl font-display font-bold gradient-text leading-[1.2]">Sage</span>
