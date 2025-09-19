@@ -51,26 +51,26 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-white via-sage-50/30 to-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-sage-100/40 via-transparent to-transparent" />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-sage-200/20 to-transparent rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-sage-100/30 to-transparent rounded-full blur-3xl" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-sage-200/20 to-transparent rounded-full blur-3xl animate-sacred-float" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-sage-100/30 to-transparent rounded-full blur-3xl animate-breathe" />
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         
         <div className="relative max-w-7xl mx-auto px-4 py-20 sm:py-32">
           <div className="text-center animate-fade-in">
             {/* Logo/Brand */}
-            <div className="mb-12">
-              <h1 className="text-5xl sm:text-7xl font-display font-bold text-wisdom-900 mb-3 tracking-tight">
+            <div className="mb-16">
+              <h1 className="text-5xl sm:text-7xl font-display font-bold text-wisdom-900 mb-6 tracking-tight">
                 Welcome to
               </h1>
-              <div className="inline-flex items-center gap-6 mb-3">
-                <div className="w-16 h-16 bg-gradient-to-br from-sage-500 to-sage-600 rounded-2xl flex items-center justify-center shadow-large">
+              <div className="inline-flex items-center gap-6 mb-6 animate-sacred-float">
+                <div className="w-16 h-16 bg-gradient-to-br from-sage-500 to-sage-600 rounded-2xl flex items-center justify-center shadow-large animate-gentle-pulse">
                   <Sparkles className="w-8 h-8 text-white" />
                 </div>
-                <span className="text-7xl font-display font-bold gradient-text leading-[1.5]">Sage</span>
+                <span className="text-7xl font-display font-bold gradient-text leading-[1.2]">Sage</span>
               </div>
               <p className="text-xl sm:text-2xl text-wisdom-600 font-light max-w-3xl mx-auto leading-relaxed">
-                Connect with history's greatest spiritual teachers through AI-powered conversations that bring ancient wisdom to modern life
+                Solve your life's toughest problems with the wisdom of history's greatest thinkers
               </p>
             </div>
 
@@ -84,7 +84,7 @@ export default function Home() {
                       name={krishnaData.philosopher.name}
                       avatar={krishnaData.philosopher.avatar_url}
                       size="lg"
-                      className="w-28 h-28 shadow-large ring-4 ring-white/80 relative z-10"
+                      className="w-28 h-28 shadow-lg ring-4 ring-white/80 relative z-10"
                     />
                   </div>
                 </div>
@@ -101,7 +101,7 @@ export default function Home() {
                     {krishnaData.philosopher.specialties.map((specialty, index) => (
                       <span
                         key={index}
-                        className="px-4 py-2 bg-gradient-to-r from-sage-50 to-sage-100 text-sage-700 rounded-full text-sm font-medium border border-sage-200/50 shadow-soft hover:shadow-medium transition-all duration-200 hover:scale-105"
+                        className="px-4 py-2 bg-gradient-to-r from-sage-50 to-sage-100 text-sage-700 rounded-full text-sm font-medium border border-sage-200/50 shadow-sm hover:shadow-md transition-all duration-200 hover:scale-105"
                       >
                         {specialty}
                       </span>
@@ -139,15 +139,15 @@ export default function Home() {
               </div>
               <div className="flex items-center justify-center gap-6 text-sm text-wisdom-500">
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-sage-400 rounded-full" />
+                  <div className="w-2 h-2 bg-sage-400 rounded-full animate-gentle-pulse" />
                   <span>Free Forever</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-sage-400 rounded-full" />
+                  <div className="w-2 h-2 bg-sage-400 rounded-full animate-gentle-pulse" style={{ animationDelay: '1s' }} />
                   <span>Anonymous</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-sage-400 rounded-full" />
+                  <div className="w-2 h-2 bg-sage-400 rounded-full animate-gentle-pulse" style={{ animationDelay: '2s' }} />
                   <span>No Signup</span>
                 </div>
               </div>

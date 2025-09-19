@@ -75,20 +75,46 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
         '2xl': '1rem',
         '3xl': '1.5rem',
+        'sacred': '1.618rem', // Golden ratio
+        'lotus': '2.618rem',  // Golden ratio squared
+        'mandala': '50%',     // Perfect circle
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
         display: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
       },
+      letterSpacing: {
+        'relaxed': '0.025em',   // Slightly relaxed
+        'wide': '0.05em',       // Wide but readable
+      },
+      lineHeight: {
+        'golden': '1.618',    // Golden ratio
+        'sacred': '1.75',     // Sacred proportion
+        'divine': '2',        // Divine spacing
+      },
+      spacing: {
+        'golden': '1.618rem', // Golden ratio unit
+        'phi': '2.618rem',    // Phi ratio
+        'sacred': '3.236rem', // Sacred proportion
+      },
       boxShadow: {
         'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
         'medium': '0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
         'large': '0 10px 40px -10px rgba(0, 0, 0, 0.15), 0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+        'divine': '0 0 30px rgba(247, 231, 161, 0.3), 0 0 60px rgba(247, 231, 161, 0.1)', // Golden glow
+        'sacred': '0 0 20px rgba(26, 77, 58, 0.2), 0 0 40px rgba(26, 77, 58, 0.1)',      // Sage aura
+        'ethereal': '0 0 40px rgba(232, 180, 203, 0.25), 0 0 80px rgba(232, 180, 203, 0.1)', // Rose light
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.3s ease-out',
         'scale-in': 'scaleIn 0.2s ease-out',
+        'breathe': 'breathe 4s ease-in-out infinite',
+        'gentle-pulse': 'gentlePulse 3s ease-in-out infinite',
+        'divine-glow': 'divineGlow 6s ease-in-out infinite',
+        'sacred-float': 'sacredFloat 8s ease-in-out infinite',
+        'lotus-bloom': 'lotusBloom 2s ease-out',
+        'mandala-spin': 'mandalaSpin 20s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -102,6 +128,35 @@ module.exports = {
         scaleIn: {
           '0%': { transform: 'scale(0.95)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        breathe: {
+          '0%, 100%': { transform: 'scale(1)', opacity: '0.8' },
+          '50%': { transform: 'scale(1.05)', opacity: '1' },
+        },
+        gentlePulse: {
+          '0%, 100%': { opacity: '0.6' },
+          '50%': { opacity: '1' },
+        },
+        divineGlow: {
+          '0%, 100%': { 
+            boxShadow: '0 0 20px rgba(247, 231, 161, 0.3), 0 0 40px rgba(247, 231, 161, 0.1)' 
+          },
+          '50%': { 
+            boxShadow: '0 0 40px rgba(247, 231, 161, 0.6), 0 0 80px rgba(247, 231, 161, 0.3)' 
+          },
+        },
+        sacredFloat: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        lotusBloom: {
+          '0%': { transform: 'scale(0.8) rotate(-5deg)', opacity: '0' },
+          '50%': { transform: 'scale(1.1) rotate(2deg)', opacity: '0.8' },
+          '100%': { transform: 'scale(1) rotate(0deg)', opacity: '1' },
+        },
+        mandalaSpin: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
         },
       },
     },

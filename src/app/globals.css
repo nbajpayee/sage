@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    /* Modern Pink/White/Black Color System */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -102,28 +103,32 @@
 }
 
 @layer components {
-  /* Modern glass effect */
+  /* Clean Glass Effects */
   .glass {
-    @apply bg-white/80 backdrop-blur-xl border border-white/20;
+    @apply bg-white/90 backdrop-blur-sm border border-neutral-200/50;
   }
   
-  /* Gradient text */
+  /* Modern Gradient Text */
   .gradient-text {
     @apply bg-gradient-to-r from-sage-600 to-sage-500 bg-clip-text text-transparent;
   }
   
-  /* Modern button styles */
+  /* Modern Button Styles */
   .btn-primary {
     @apply bg-gradient-to-r from-sage-500 to-sage-600 hover:from-sage-600 hover:to-sage-700 text-white shadow-medium hover:shadow-large transition-all duration-300 transform hover:scale-105;
   }
   
-  /* Card styles */
+  /* Clean Card Styles */
   .card-modern {
-    @apply bg-white rounded-2xl shadow-soft hover:shadow-medium transition-all duration-300 border border-gray-100/50;
+    @apply bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 border border-neutral-200/50;
   }
   
-  /* Input styles */
+  .card-premium {
+    @apply bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 border border-neutral-200/50 hover:border-sage-200;
+  }
+  
+  /* Clean Input Styles */
   .input-modern {
-    @apply bg-white/50 border-gray-200 focus:border-sage-400 focus:ring-sage-400/20 rounded-xl transition-all duration-200;
+    @apply bg-white border-neutral-300 focus:border-sage-500 focus:ring-sage-500/20 rounded-lg transition-all duration-200;
   }
 }
